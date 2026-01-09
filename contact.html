@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto | YAPABBA</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <h2 class="logo">YAPABBA</h2>
+    <ul class="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="about.html">Nosotros</a></li>
+      <li><a href="services.html">Servicios</a></li>
+      <li><a href="contact.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="contact">
+  <h1>Contacto</h1>
+  <p>¿Tienes alguna pregunta o quieres trabajar con nosotros? Escríbenos.</p>
+
+<form
+  id="contactForm"
+  action="https://formsubmit.co/yapabbasrl@hotmail.com"
+  method="POST"
+>
+  <!-- NOMBRE -->
+  <div class="form-group icon-input">
+    <i data-lucide="user"></i>
+    <input
+      type="text"
+      id="name"
+      name="Nombre"
+      placeholder="Nombre completo"
+      required
+    >
+    <span class="error-text" id="error-name">El nombre es obligatorio</span>
+  </div>
+
+  <!-- EMAIL -->
+  <div class="form-group icon-input">
+    <i data-lucide="mail"></i>
+    <input
+      type="email"
+      id="email"
+      name="Correo"
+      placeholder="Correo electrónico"
+      required
+    >
+    <span class="error-text" id="error-email">Correo inválido</span>
+  </div>
+
+  <!-- MENSAJE -->
+  <div class="form-group icon-input">
+    <i data-lucide="message-square"></i>
+    <textarea
+      id="message"
+      name="Mensaje"
+      placeholder="Escribe tu mensaje"
+      required
+    ></textarea>
+    <span class="error-text" id="error-message">El mensaje no puede estar vacío</span>
+  </div>
+
+  <button type="submit">Enviar mensaje</button>
+
+  <p class="success-message" id="successMessage">
+    ✅ Mensaje enviado correctamente. Nos pondremos en contacto contigo.
+  </p>
+
+</form>
+
+
+</main>
+
+<footer>
+  <p>© 2026 YAPABBA. Todos los derechos reservados.</p>
+</footer>
+
+<!-- JS -->
+<script src="js/menu.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+<script>
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let valid = true;
+
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
+
+  const errorName = document.getElementById("error-name");
+  const errorEmail = document.getElementById("error-email");
+  const errorMessage = document.getElementById("error-message");
+  const success = document.getElementById("successMessage");
+
+  // Reset
+  document.querySelectorAll(".error-text").forEach(e => e.style.display = "none");
+  document.querySelectorAll("input, textarea").forEach(e => {
+    e.classList.remove("invalid", "valid");
+  });
+  success.classList.remove("show");
+
+  // Nombre
+  if (name.value.trim() === "") {
+    errorName.style.display = "block";
+    name.classList.add("invalid");
+    valid = false;
+  } else {
+    name.classList.add("valid");
+  }
+
+  // Email
+  if (!email.value.includes("@")) {
+    errorEmail.style.display = "block";
+    email.classList.add("invalid");
+    valid = false;
+  } else {
+    email.classList.add("valid");
+  }
+
+  // Mensaje
+  if (message.value.trim() === "") {
+    errorMessage.style.display = "block";
+    message.classList.add("invalid");
+    valid = false;
+  } else {
+    message.classList.add("valid");
+  }
+
+  if (valid) {
+    success.classList.add("show");
+    form.reset();
+  }
+});
+</script>
+
+</body>
+</html>
+
